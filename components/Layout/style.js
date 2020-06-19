@@ -9,11 +9,14 @@ export const global = css.global`
         box-sizing: border-box;
     }
 
-    body {
+    html, body {
         font-size: 16px;
     }
+    @media all and (min-width:600px) and (max-width:1023px) {
+        html, body { font-size: 15px; }
+    }
     @media all and (max-width:599px) {
-        font-size: 15px;
+        html, body { font-size: 14px; }
     }
 
     :root {
