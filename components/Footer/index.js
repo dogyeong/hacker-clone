@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer>
             <span>
-                <a href="https://github.com/dogyeong" target="_blank">
+                <a href="https://github.com/dogyeong/hacker-clone" target="_blank">
                     <RiGithubLine />GitHub
                 </a>
             </span>

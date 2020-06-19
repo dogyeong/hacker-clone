@@ -11,16 +11,15 @@ export default css`
 
     span {
         display: inline-flex;
+        justify-content: center;
         align-items: center;
-        padding: 0.3em 0.5em;
-        border-radius: 0.3em;
     }
 
-    span:hover {
-        background-color: #eee;
+    span:hover a {
+        color: var(--primary-color);
     }
 
     span + span {
-        margin-left: 1em;
+        margin-left: 1.2em;
     }
 `

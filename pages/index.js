@@ -2,16 +2,15 @@ import { fetchNews } from '../lib/api'
 import StoryList from '../components/StoryList'
 import Layout from '../components/Layout'
 import Error from 'next/error'
-import ReactPaginate from 'react-paginate'
+import Ragination from '../components/Pagination'
 import Router from 'next/router'
-import paginationStyle from '../components/Pagination/style'
-import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
+import { useState } from 'react'
 
 export default function Index({ data=[], page }) {
-    const handlePageClick = (data) => {
-        window.scrollTo(0,0)
-        Router.push(`/?page=${data.selected + 1}`)
-    }
+    const [isLoading, setIsLoading] = useState(false)
+
+    Router.onRouteChangeStart = url => setIsLoading(true)
+    Router.onRouteChangeComplete = () => setIsLoading(false)
 
     if (data.length === 0) {
         return <Error statusCode={500} />
@@ -19,23 +18,8 @@ export default function Index({ data=[], page }) {
 
     return (
         <Layout>
-            <StoryList data={data} />
-            <ReactPaginate 
-                onPageChange={handlePageClick}
-                pageCount={10}
-                pageRangeDisplayed={2}
-                marginPagesDisplayed={1}
-                forcePage={page-1}
-                previousLabel={<RiArrowLeftSLine />}
-                previousLinkClassName={"prev-link"}
-                nextLinkClassName={"next-link"}
-                nextLabel={<RiArrowRightSLine />}
-                breakLabel={"···"}
-                breakClassName={'break-me'}
-                containerClassName={'pagination'}
-                activeLinkClassName={'active'}
-            />
-            <style jsx>{paginationStyle}</style>
+            <StoryList data={data} isLoading={isLoading} />
+            <Ragination page={page} />
         </Layout>
     )
 }
@@ -44,7 +28,7 @@ export async function getServerSideProps(context) {
     const { query } = context
     const page = Number(query.page) || 1
     const data = await fetchNews(page).catch(err => [])
-
+    
     return {
         props: { data, page }
     }
