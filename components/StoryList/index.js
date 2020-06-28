@@ -33,7 +33,7 @@ export default function StoryList({ data, isLoading }) {
                   {story.points}
                 </span>
                 <span>
-                  <Link href={`/item?id=${story.id}`}>
+                  <Link href={`/story?id=${story.id}`}>
                     <a>
                       <RiChat3Line />
                       {story.comments_count}

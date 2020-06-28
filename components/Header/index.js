@@ -8,8 +8,8 @@ export default function Header({ backButton }) {
     <header>
       <div className="inner">
         {backButton && (
-          <span onClick={() => Router.back()}>
-            <RiArrowLeftLine />
+          <span className="back" onClick={() => Router.back()}>
+            <RiArrowLeftLine size={20} />
           </span>
         )}
         <span className="logo">

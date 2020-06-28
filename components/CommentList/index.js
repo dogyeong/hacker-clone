@@ -1,4 +1,5 @@
 import Comment from '../Comment'
+import style from './style'
 
 export default function CommentList({ comments }) {
   if (comments.length === 0) {
@@ -6,10 +7,11 @@ export default function CommentList({ comments }) {
   }
 
   return (
-    <React.Fragment>
+    <div className="comment-list">
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
-    </React.Fragment>
+      <style jsx>{style}</style>
+    </div>
   )
 }
